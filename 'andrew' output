@@ -1,0 +1,76 @@
+using namespace std;
+
+int led1 = D0; 
+
+int led2 = D7; 
+
+
+int morseCode[26][4] = 
+{
+    {100,500,0,0},  // a
+    {0,0,0,0},
+    {0,0,0,0},
+    {500,100,100,0},   // d
+    {100,0,0,0},         // e
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {500,100,0,0},     // n
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {100,500,100,0},  // r
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0},
+    {100,500,500,0},   // w
+    {0,0,0,0},
+    {0,0,0,0},
+    {0,0,0,0}
+};
+
+void displayMorse (char letter)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        int arrPos = (letter - 97);
+        if (morseCode[arrPos][i] == 0)
+        {
+            continue;
+        }
+        
+        digitalWrite(led1, HIGH);
+        digitalWrite(led2, HIGH);
+        delay(morseCode[arrPos][i]);
+        digitalWrite(led1, LOW);
+        digitalWrite(led2, LOW);
+        delay(1000);
+    }
+}
+
+string name = "andrew";
+
+void setup() {
+
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  
+}
+
+void loop() {
+
+    for (int i=0; i < name.length(); i++)
+    {
+        displayMorse(name[i]);
+    }
+    
+
+    delay(2000);
+
+}
